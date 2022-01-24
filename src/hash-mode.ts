@@ -1,10 +1,3 @@
-/*
- * @Description: 
- * @Author: Gavin
- * @version: 
- * @Date: 2020-11-03 16:27:50
- * @LastEditTime: 2020-11-20 15:43:48
- */
 /**
  * 处理spa hash模式
  */
