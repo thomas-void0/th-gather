@@ -8,8 +8,8 @@ export function jsError(error: ErrorEvent): ErrorMsg {
     type: 'error',
     st: 'js',
     file: error.filename,
-    // line: error.lineno,
-    // col: error.colno,
+    line: error.lineno,
+    col: error.colno,
     msg: error.message,
     // stack: error.error?.stack?.substring(0, 1e3),
   };
@@ -31,7 +31,6 @@ export function resourceError(e: any): ErrorMsg {
 // promise异常
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function promiseError(e): ErrorMsg {
-  console.log("errr==>",e.reason,"promise")
   return {
     ...getBaseMsg(),
     type: 'error',
