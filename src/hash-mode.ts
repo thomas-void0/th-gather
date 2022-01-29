@@ -2,7 +2,6 @@
  * 处理spa hash模式
  */
 import setPage from './libs/pv-data';
-import { getSessionStorage } from "./libs/send-data"
 
 const _historyWrap = function(type) {
   const orig = history[type];
@@ -81,16 +80,6 @@ const hashMode = (): void => {
   //   listener()
   // })
   
-  //页面卸载，进行一次数据上传
-  window.addEventListener('unload', ()=>{
-    if ('sendBeacon' in window.navigator) {
-      const list = getSessionStorage();
-      const fd = new FormData();
-      fd.append('value', JSON.stringify(list));
-      window.navigator.sendBeacon(window['gather_config'].url, fd);
-      window.sessionStorage.clear() //清除
-    }
-  })
 };
 
 export default hashMode;
