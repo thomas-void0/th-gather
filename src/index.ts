@@ -1,5 +1,5 @@
 import { proxy } from "ajax-hook"
-import config,{checkKeys} from './config';
+// import config,{checkKeys} from './config';
 import { jsError, resourceError, promiseError } from './libs/get-error';
 import performance from './libs/performance';
 import getBaseMsg from './libs/get-base-msg';
@@ -38,7 +38,7 @@ const listenerUnload =  () => {
   }
 }
 
-export default { sendData, getBaseMsg };
+// export default { sendData, getBaseMsg };
 
 const defaultGatherKeys = [
   'key',
@@ -56,7 +56,7 @@ const defaultGatherKeys = [
 ]
 
 // 需要收集的配置
-function init(options:Options){
+export default function init(options:Options){
 
   // 仅能初始化一次配置
   if(window['$$th-gather']){
@@ -125,4 +125,4 @@ function init(options:Options){
   // 调用回调监听
   callback(record)
 }
-    
+
