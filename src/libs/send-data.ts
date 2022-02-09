@@ -9,7 +9,7 @@ export const getSessionStorage = ():TList[] | Array<any>=>{
 const _list = getSessionStorage(); 
 
 //检查是否需要发送消息
-const isSend =(list:TList[]):boolean=> list.length >= window["gather_config"].tthreshold;
+const isSend =(list:TList[]):boolean=> list.length >= window["$$th-gather"].tthreshold;
 
 //设置并且检测浏览器中的信息记录
 const setLocalStorage = (data: TList):TList[] | undefined =>{
@@ -28,12 +28,12 @@ const setLocalStorage = (data: TList):TList[] | undefined =>{
   // }
  
   window.sessionStorage.setItem("NR_TRADE_GATHER_LIST",JSON.stringify(_list))
-  return isSend(_list) ? _list.slice(0,window["gather_config"].tthreshold) : void 0
+  return isSend(_list) ? _list.slice(0,window["$$th-gather"].tthreshold) : void 0
 };
 
 //清除相应的数据存储
 const resetList = ():void=>{
-  _list.splice(0,window["gather_config"].tthreshold);
+  _list.splice(0,window["$$th-gather"].tthreshold);
   window.sessionStorage.clear()
 }
 
@@ -54,7 +54,7 @@ export default function sendData(data: TList): void {
     const formData = new FormData();
     formData.append('value', JSON.stringify(list));
     //进行数据上报
-    fetch(window['gather_config'].url, {
+    fetch(window['$$th-gather'].url, {
       credentials: 'include',
       method: 'post',
       body: formData,

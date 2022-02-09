@@ -95,15 +95,15 @@ export default function init(options:Options){
     //请求发生错误时进入，比如超时；注意，不包括http状态码错误，如404仍然会认为请求成功
     onError: (err, handler) => handler.next(err),
     //请求成功后进入
-    onResponse: (_response, handler) => {
+    onResponse: (response, handler) => {
 
       //获取的接口的返回值信息
-      const xmlObj = getXMLInfo(_response)
+      const xmlObj = getXMLInfo(response)
       sendData(xmlObj)
 
       //设置用户uuid
-      setUserUUid(_response);
-      handler.next(_response)
+      setUserUUid(response);
+      handler.next(response) 
     }
   })
 

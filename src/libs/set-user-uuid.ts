@@ -5,7 +5,7 @@ const setUserUUid = (_response):void=>{
     try {
         const res = response ? JSON.parse(response) : {value:{user:{}}}
         if(url.includes("/xdnphb/common/account/get")){
-            window.localStorage.setItem("NR_GATHER_USER_UID",res.value.user.uuid)
+            window.localStorage.setItem("$$_TH_GATHER",res.value.user.uuid)
         }
     } catch (error) {}
 }
