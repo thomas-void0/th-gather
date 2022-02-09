@@ -14,19 +14,6 @@ const isSend =(list:TList[]):boolean=> list.length >= window["$$th-gather"].tthr
 //设置并且检测浏览器中的信息记录
 const setLocalStorage = (data: TList):TList[] | undefined =>{
   _list.push(data);
-
-  // let j = 0;
-  // while(j<_list.length){
-  //   let item = _list[j];
-  //   for(let i = 0;i<_list.length;i++){
-  //     if(i === j) continue;
-  //     if(_list[i].type === item.type && _list[i].gmt === item.gmt){
-  //       console.error("错误，连续上传了2条一样的数据:",item)
-  //     }
-  //   }
-  //   j++
-  // }
- 
   window.sessionStorage.setItem("NR_TRADE_GATHER_LIST",JSON.stringify(_list))
   return isSend(_list) ? _list.slice(0,window["$$th-gather"].tthreshold) : void 0
 };

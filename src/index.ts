@@ -2,43 +2,20 @@ import { proxy } from "ajax-hook"
 // import config,{checkKeys} from './config';
 import { jsError, resourceError, promiseError } from './libs/get-error';
 import performance from './libs/performance';
-import getBaseMsg from './libs/get-base-msg';
 import sendData from './libs/send-data';
-import hashMode from './hash-mode';
+import listenerRoute from './listenerRoute';
 import getXMLInfo from "./libs/get-xml"
 import setUserUUid from "./libs/set-user-uuid"
 import handleError from "./libs/handleError";
-import { getSessionStorage } from "./libs/send-data"
 import { Options } from "./typings";
-
+import listenerUnload from "./listenerUnload";
+import listenerError from "./listenerError";
 
 //一定时间后开始监听performance
-const listenerPerformance = () =>setTimeout(() => sendData(performance()), window['$$th-gather'].outtime);
-
-//监听错误
-const listenerError = e => {
-  if (e instanceof ErrorEvent) {
-    sendData(jsError(e));
-  } else {
-    e.target?.src !== window.location.href &&  sendData(resourceError(e));
-  }
-};
+const listenerPerformance = () => setTimeout(() => sendData(performance()), window['$$th-gather'].outtime);
 
 //监听promise错误
 const listenerPromiseError = e => sendData(promiseError(e));
-
-// 监听页面卸载
-const listenerUnload =  () => {
-  if ('sendBeacon' in window.navigator) {
-    const list = getSessionStorage();
-    const fd = new FormData();
-    fd.append('value', JSON.stringify(list));
-    window.navigator.sendBeacon(window['$$th-gather'].url, fd);
-    window.sessionStorage.clear() //清除
-  }
-}
-
-// export default { sendData, getBaseMsg };
 
 const defaultGatherKeys = [
   'key',
@@ -65,12 +42,12 @@ export default function init(options:Options){
   }
 
   const { 
-    projectKey,
-    url,
-    gatherKeys = defaultGatherKeys,
-    callback,
-    frequency,
-    isDiscard = true
+    projectKey, // 项目key
+    url, // 上报地址
+    gatherKeys = defaultGatherKeys, // 收集的字段
+    callback, // 回调函数
+    frequency, // 上报频率
+    isDiscard = true // 是否销毁上报
   } = options
 
   !projectKey && handleError("params error，'projectKey' is required");
@@ -108,7 +85,7 @@ export default function init(options:Options){
   })
 
   //监听页面资源error
-  window.addEventListener('error', listenerError, true);
+  listenerError()
 
   //监听页面promise发生错误，没有被reject处理的reject
   window.addEventListener('unhandledrejection', listenerPromiseError, false);
@@ -117,10 +94,10 @@ export default function init(options:Options){
   window.addEventListener('load', listenerPerformance, false);
 
   //页面卸载，进行一次数据上传
-  isDiscard && window.addEventListener('unload',listenerUnload)
+  isDiscard && listenerUnload()
 
   // 监听路由信息
-  hashMode();
+  listenerRoute();
 
   // 调用回调监听
   callback(record)
