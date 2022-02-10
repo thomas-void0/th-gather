@@ -108,6 +108,17 @@ export interface Options {
   /* 上报频率默认10条 */
   frequency?:number,
   /* 是否不上报数量不足的记录 */
-  isDiscard?:boolean
+  isDiscard?:boolean,
+  /* 是否监听路由信息 */
+  isRoutes?:boolean,
+  /* 是否监听浏览器性能信息 */
+  isPerformance?:boolean,
+  /* 是否监听promise错误 */
+  isPromiseError?:boolean,
+  /* 是否监听页面资源错误 */
+  isResourceError?:boolean,
+  /* 是否监听接口请求信息 */
+  isRequest?:boolean
 }
+
 export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType

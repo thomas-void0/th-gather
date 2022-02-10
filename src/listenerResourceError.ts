@@ -1,5 +1,6 @@
-import getBaseMsg from './get-base-msg';
-import { ErrorMsg } from '../typings';
+import getBaseMsg from "./libs/get-base-msg";
+import sendData from "./libs/send-data";
+import { ErrorMsg } from "./typings";
 
 // js错误
 export function jsError(error: ErrorEvent): ErrorMsg {
@@ -16,7 +17,6 @@ export function jsError(error: ErrorEvent): ErrorMsg {
 }
 
 // 资源异常
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function resourceError(e: any): ErrorMsg {
   return {
     ...getBaseMsg(),
@@ -28,15 +28,18 @@ export function resourceError(e: any): ErrorMsg {
   };
 }
 
-// promise异常
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function promiseError(e): ErrorMsg {
-  return {
-    ...getBaseMsg(),
-    type: 'error',
-    st: 'promise',
-    msg: e.reason,
-    // stack: '',
-    file: '',
-  };
+const _listenerError = e => {
+  if (e instanceof ErrorEvent) {
+    sendData(jsError(e));
+  } else {
+    e.target?.src !== window.location.href && sendData(resourceError(e));
+  }
 }
+
+//监听错误
+const listenerResourceError = () => {
+  //监听页面资源error
+  window.addEventListener('error', _listenerError, true);
+};
+
+export default listenerResourceError

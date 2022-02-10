@@ -1,5 +1,7 @@
-import getBaseMsg from './get-base-msg';
-import { Performance } from '../typings';
+// 监听用户浏览器信息
+import sendData from "./libs/send-data";
+import getBaseMsg from './libs/get-base-msg';
+import { Performance } from './typings';
 
 export interface Perfaormance {
   dns: number;
@@ -50,4 +52,9 @@ const performance = (): Performance => {
   };
 };
 
-export default performance;
+//一定时间后开始监听performance
+const _listenerPerformance = () => setTimeout(() => sendData(performance()), window['$$th-gather'].outtime);
+
+export default function listenerPerformance(){
+  window.addEventListener('load', _listenerPerformance, false);
+}
