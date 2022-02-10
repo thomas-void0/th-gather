@@ -1,5 +1,5 @@
-import getBaseMsg from "./libs/get-base-msg";
-import sendData from "./libs/send-data";
+import getBaseMsg from "./libs/getBaseMsg";
+import dispatchData from "./libs/dispatchData";
 import { ErrorMsg } from "./typings";
 
 // js错误
@@ -30,9 +30,9 @@ export function resourceError(e: any): ErrorMsg {
 
 const _listenerError = e => {
   if (e instanceof ErrorEvent) {
-    sendData(jsError(e));
+    dispatchData(jsError(e));
   } else {
-    e.target?.src !== window.location.href && sendData(resourceError(e));
+    e.target?.src !== window.location.href && dispatchData(resourceError(e));
   }
 }
 

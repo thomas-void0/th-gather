@@ -104,7 +104,7 @@ export interface Options {
   /* 需要收集的字段key值 */
   gatherKeys: Msg[],
   /* 扩展函数，在init的时候被调用。可以接受到记录对象 */
-  callback?: (record:Msg[]) => Record<string,any>,
+  callback?: (dispatchData:(arg:any)=>void) => void,
   /* 上报频率默认10条 */
   frequency?:number,
   /* 是否不上报数量不足的记录 */

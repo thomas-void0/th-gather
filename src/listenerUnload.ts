@@ -1,5 +1,5 @@
 // 监听页面卸载
-import { getSessionStorage } from "./libs/send-data"
+import { getSessionStorage } from "./libs/dispatchData"
 
 const listenerUnload =  () => {
   window.addEventListener('unload',()=>{

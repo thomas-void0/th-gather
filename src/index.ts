@@ -1,4 +1,3 @@
-import handleError from "./libs/handleError";
 import { Options } from "./typings";
 import listenerRoute from './listenerRoute';
 import listenerUnload from "./listenerUnload";
@@ -6,24 +5,11 @@ import listenerResourceError from "./listenerResourceError";
 import listenerRequest from "./listenerRequest"
 import listenerPromiseError from "./listenerPromiseError"
 import listenerPerformance from "./listenerPerformance";
+import dispatchData from "./libs/dispatchData";
 
-const defaultGatherKeys = [
-  'key',
-  'o',
-  'ua',
-  'ul',
-  'ct',
-  'vp',
-  'sr',
-  'uid',
-  'uuid',
-  'gmt',
-  'dpr',
-  'rf'
-]
-
-// 需要收集的配置
 export default function init(options:Options){
+
+  const defaultGatherKeys = ['key','o','ua','ul','ct','vp','sr','uid','uuid','gmt','dpr','rf']
 
   // 仅能初始化一次配置
   if(window['$$th-gather']){
@@ -45,14 +31,16 @@ export default function init(options:Options){
     isRequest = true
   } = options
 
-  !projectKey && handleError("params error，'projectKey' is required");
-  !url && handleError("params error，'url' is required");
+  if(!projectKey){
+    throw new Error("params error，'projectKey' is required")
+  }
+
+  if(!url){
+    throw new Error("params error，'url' is required")
+  }
 
   // 挂载配置
   window['$$th-gather'] = options
-
-  // 初始化记录对象
-  const record = []
 
   // 监听接口请求
   if(isRequest){ 
@@ -86,7 +74,7 @@ export default function init(options:Options){
 
   // 调用回调监听
   if(callback instanceof Function){
-    callback(record)
+    callback(dispatchData)
   }
 }
 

@@ -1,6 +1,6 @@
 // 监听用户浏览器信息
-import sendData from "./libs/send-data";
-import getBaseMsg from './libs/get-base-msg';
+import dispatchData from "./libs/dispatchData";
+import getBaseMsg from './libs/getBaseMsg';
 import { Performance } from './typings';
 
 export interface Perfaormance {
@@ -53,7 +53,7 @@ const performance = (): Performance => {
 };
 
 //一定时间后开始监听performance
-const _listenerPerformance = () => setTimeout(() => sendData(performance()), window['$$th-gather'].outtime);
+const _listenerPerformance = () => setTimeout(() => dispatchData(performance()), window['$$th-gather'].outtime);
 
 export default function listenerPerformance(){
   window.addEventListener('load', _listenerPerformance, false);

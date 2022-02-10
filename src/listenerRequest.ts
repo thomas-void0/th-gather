@@ -1,10 +1,9 @@
 // 监听接口请求
 import { proxy,XhrResponse } from "ajax-hook"
-import setUserUUid from "./libs/set-user-uuid"
-import sendData from './libs/send-data';
+import dispatchData from './libs/dispatchData';
 import { XMLType } from "./typings";
-import getBaseMsg from "./libs/get-base-msg";
-import format from "./libs/date-format";
+import getBaseMsg from "./libs/getBaseMsg";
+import format from "./libs/format";
 
 //获取接口请求信息
 const getRequestInfo = (_response:XhrResponse):XMLType =>{
@@ -41,10 +40,8 @@ export default function listenerRequest(){
 
       //获取的接口的返回值信息
       const xmlObj = getRequestInfo(response)
-      sendData(xmlObj)
+      dispatchData(xmlObj)
 
-      //设置用户uuid
-      setUserUUid(response);
       handler.next(response) 
     }
   })

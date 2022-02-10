@@ -1,5 +1,5 @@
-import getBaseMsg from './libs/get-base-msg';
-import sendData from "./libs/send-data";
+import getBaseMsg from './libs/getBaseMsg';
+import dispatchData from "./libs/dispatchData";
 
 const historyWrap = function(type) {
   const orig = history[type];
@@ -18,7 +18,7 @@ const listenerRoute = (): void => {
   let prev_time = Date.now();
 
   const _listener = () => {
-    sendData({
+    dispatchData({
       ...getBaseMsg(),
       pathname: window.location.href,
       from: prev_pathname,

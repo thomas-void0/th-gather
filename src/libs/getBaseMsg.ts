@@ -1,6 +1,6 @@
 import uid from './uid';
 import { BaseMsg } from '../typings';
-import format from './date-format';
+import format from './format';
 
 // 浏览器宽高
 const getWH = () => {

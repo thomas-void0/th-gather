@@ -1,3 +1,4 @@
+// 生成每一条数据对应的uuid
 const uid = (): string => {
   return 'xxxxxxxxyxxxyxxxyxxxyxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
