@@ -55,25 +55,39 @@ export default function init(options:Options){
   const record = []
 
   // 监听接口请求
-  isRequest && listenerRequest()
+  if(isRequest){ 
+    listenerRequest()
+  }
 
   // 监听页面资源error
-  isResourceError && listenerResourceError()
+  if(isResourceError){
+    listenerResourceError()
+  }
 
   // 监听页面promise发生错误
-  isPromiseError && listenerPromiseError()
+  if(isPromiseError){
+    listenerPromiseError()
+  }
 
   // 监听performance等信息
-  isPerformance && listenerPerformance()
+  if(isPerformance){
+    listenerPerformance()
+  }
 
   //页面卸载，进行一次数据上传
-  isDiscard && listenerUnload()
+  if(isDiscard){
+    listenerUnload()
+  }
 
   // 监听路由信息
-  isRoutes && listenerRoute()
+  if(isRoutes){
+    listenerRoute()
+  }
 
   // 调用回调监听
-  callback(record)
+  if(callback instanceof Function){
+    callback(record)
+  }
 }
 
 
