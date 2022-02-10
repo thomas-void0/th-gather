@@ -1,8 +1,29 @@
 // 监听接口请求
-import { proxy } from "ajax-hook"
-import getXMLInfo from "./libs/get-xml"
+import { proxy,XhrResponse } from "ajax-hook"
 import setUserUUid from "./libs/set-user-uuid"
 import sendData from './libs/send-data';
+import { XMLType } from "./typings";
+import getBaseMsg from "./libs/get-base-msg";
+import format from "./libs/date-format";
+
+//获取接口请求信息
+const getRequestInfo = (_response:XhrResponse):XMLType =>{
+  //如果当前列表中的所有数据都收集完毕，那么执行发送操作
+  const { url,headers } = _response.config || {};
+  const rq = headers ? headers.rq : 0;
+  const _url = url ? url.split('?')[0] : ""
+  const rp = Date.now()
+
+  return{
+      ...getBaseMsg(),
+      type:"interface",
+      url:_url,
+      rq:format(rq),
+      rp:format(rp),
+      cd:_response.status || 0,
+      tc:rp - rq
+  }
+}
 
 export default function listenerRequest(){
   // 拦截所有由XMLHttpRequest发起的请求
@@ -19,7 +40,7 @@ export default function listenerRequest(){
     onResponse: (response, handler) => {
 
       //获取的接口的返回值信息
-      const xmlObj = getXMLInfo(response)
+      const xmlObj = getRequestInfo(response)
       sendData(xmlObj)
 
       //设置用户uuid
