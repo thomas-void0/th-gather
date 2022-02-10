@@ -28,24 +28,12 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      // dir: 'dist',
-      file: `public/gather-${pkg.version}.js`,
+      file: `dist/gather-${pkg.version}.js`,
       format: 'iife',
       name: 'gather',
       exports: 'default',
     },
     // external: [/@babel\/runtime-corejs3/],
-    plugins,
-  },
-  {
-    input: 'src/fetch.ts',
-    output: {
-      // dir: 'dist',
-      file: `dist/gather-fetch-${pkg.version}.js`,
-      format: 'iife',
-      name: 'gather',
-      exports: 'default',
-    },
     plugins,
   },
 ];

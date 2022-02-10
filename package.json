@@ -23,9 +23,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.1",
-    "ajax-hook": "2.0.3",
-    "install": "0.13.0",
-    "whatwg-fetch": "3.4.1"
+    "ajax-hook": "2.0.3"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
@@ -35,7 +33,6 @@
     "@rollup/plugin-commonjs": "16.0.0",
     "@rollup/plugin-node-resolve": "10.0.0",
     "@rollup/plugin-typescript": "6.1.0",
-    "@types/whatwg-fetch": "0.0.33",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
     "eslint": "7.12.1",

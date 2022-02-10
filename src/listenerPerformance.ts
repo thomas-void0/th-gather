@@ -53,7 +53,7 @@ const performance = (): Performance => {
 };
 
 //一定时间后开始监听performance
-const _listenerPerformance = () => setTimeout(() => dispatchData(performance()), window['$$th-gather'].outtime);
+const _listenerPerformance = () => setTimeout(() => dispatchData(performance()), 300);
 
 export default function listenerPerformance(){
   window.addEventListener('load', _listenerPerformance, false);

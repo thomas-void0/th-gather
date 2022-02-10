@@ -1,5 +1,6 @@
 import getBaseMsg from './libs/getBaseMsg';
 import dispatchData from "./libs/dispatchData";
+import { PvType } from './typings';
 
 const historyWrap = function(type) {
   const orig = history[type];
@@ -18,15 +19,15 @@ const listenerRoute = (): void => {
   let prev_time = Date.now();
 
   const _listener = () => {
-    dispatchData({
+    const msg:PvType = {
       ...getBaseMsg(),
       pathname: window.location.href,
       from: prev_pathname,
       title: document.title,
       type: 'pv',
       stay: Date.now() - prev_time,
-    });
-  
+    }
+    dispatchData(msg);
     prev_pathname = window.location.href;
   };
 

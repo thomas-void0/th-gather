@@ -11,8 +11,6 @@ export interface BaseMsg {
   // 屏幕宽高
   sr: string;
   // 表示用户的唯一值
-  uid: string;
-  //表示新榜用户的uuid
   uuid:string,
   // 时间
   gmt: string;
@@ -83,6 +81,7 @@ export interface XMLType extends BaseMsg {
   //接受响应时间
   rp:string
 }
+
 //点击类型统计
 export interface PvType extends BaseMsg{
   type:"pv",
@@ -95,6 +94,8 @@ export interface PvType extends BaseMsg{
   //持续时间
   stay:number
 }
+
+export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType
 
 export interface Options {
   /* 上报项目key值 */
@@ -120,5 +121,3 @@ export interface Options {
   /* 是否监听接口请求信息 */
   isRequest?:boolean
 }
-
-export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType

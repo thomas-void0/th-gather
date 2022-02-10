@@ -1,6 +1,6 @@
-import getBaseMsg from "./libs/getBaseMsg";
-import dispatchData from "./libs/dispatchData";
-import { ErrorMsg } from "./typings";
+import getBaseMsg from './libs/getBaseMsg';
+import dispatchData from './libs/dispatchData';
+import { ErrorMsg } from './typings';
 
 // js错误
 export function jsError(error: ErrorEvent): ErrorMsg {
@@ -9,6 +9,8 @@ export function jsError(error: ErrorEvent): ErrorMsg {
     type: 'error',
     st: 'js',
     file: error.filename,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     line: error.lineno,
     col: error.colno,
     msg: error.message,
@@ -28,13 +30,13 @@ export function resourceError(e: any): ErrorMsg {
   };
 }
 
-const _listenerError = e => {
+const _listenerError = (e) => {
   if (e instanceof ErrorEvent) {
     dispatchData(jsError(e));
   } else {
     e.target?.src !== window.location.href && dispatchData(resourceError(e));
   }
-}
+};
 
 //监听错误
 const listenerResourceError = () => {
@@ -42,4 +44,4 @@ const listenerResourceError = () => {
   window.addEventListener('error', _listenerError, true);
 };
 
-export default listenerResourceError
+export default listenerResourceError;
