@@ -1,6 +1,7 @@
 import getUuid from './uuid';
 import { BaseMsg } from '../typings';
 import format from './format';
+import * as CONFIG from '../config';
 
 // 浏览器宽高
 const getWH = () => {
@@ -65,7 +66,7 @@ const getBaseMsg = (): BaseMsg => {
     sr: screen.width + '*' + screen.height,
     uuid: getId(),
     gmt: format(),
-    key: window['gather_config'].key,
+    key: window[CONFIG.KEY].key,
     dpr: window.devicePixelRatio,
     rf: document.referrer,
   };

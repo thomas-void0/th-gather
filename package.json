@@ -11,12 +11,7 @@
     "esm"
   ],
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:iife": "node clear.js && rollup -c",
-    "build:esm": "tsc --module ES6 --outDir esm",
-    "build:cjs": "tsc --module CommonJS --outDir cjs",
-    "preversion": "yarn build",
-    "postversion": "yarn build:iife",
+    "build": "node clear.js && rollup -c",
     "watch": "rollup -c -w",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve public"

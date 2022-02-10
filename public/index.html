@@ -1,20 +1,23 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head lang='zh-CN'>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width'>
-	<title>rollup-app</title>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>rollup-app</title>
 
-	<style>
-		body {
-			font-family: 'Helvetica Neue', Arial, sans-serif;
-			color: #333;
-			font-weight: 300;
-		}
-	</style>
-</head>
-<body>
-	<h1>rollup-app</h1>
-</body>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #333;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>rollup-app</h1>
+    <script src="gather-0.0.3.js"></script>
+    <script>
+      console.log(window.gather({ projectKey: 'pc', url: '/husa' }));
+    </script>
+  </body>
 </html>
