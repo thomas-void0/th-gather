@@ -3,13 +3,13 @@
   "version": "0.1.2",
   "main": "./dist/gather.cjs.js",
   "module": "./dist/gather.module.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "description": "全埋点sdk",
   "repository": "https://github.com/thomas-void0/th-gather",
   "author": "thomas-void0",
   "license": "MIT",
   "scripts": {
-    "build": "node clear.js && rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "watch": "rollup -c -w",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve public"
