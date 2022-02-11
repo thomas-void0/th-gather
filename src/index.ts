@@ -35,7 +35,11 @@ export default function init(options: Options): void {
   }
 
   // 挂载配置
-  window[CONFIG.KEY] = options;
+  if (options.frequency) {
+    window[CONFIG.KEY] = options;
+  } else {
+    window[CONFIG.KEY] = { ...options, frequency: 10 };
+  }
 
   // 监听接口请求
   if (isRequest) {
