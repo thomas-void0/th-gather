@@ -1,6 +1,6 @@
 {
   "name": "th-gather",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "./dist/main.umd.js",
   "repository": "https://github.com/thomas-void0/th-gather",
   "author": "thomas-void0",
