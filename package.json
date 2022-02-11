@@ -1,7 +1,9 @@
 {
   "name": "th-gather",
   "version": "0.1.2",
-  "main": "./dist/main.umd.js",
+  "main": "./dist/gather.cjs.js",
+  "module": "./dist/gather.module.js",
+  "types": "./dist/index.d.ts",
   "description": "全埋点sdk",
   "repository": "https://github.com/thomas-void0/th-gather",
   "author": "thomas-void0",

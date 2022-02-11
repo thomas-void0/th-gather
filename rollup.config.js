@@ -8,7 +8,7 @@ const plugins = [
   resolve(),
   commonjs(),
   typescript({
-    declaration: true,
+    useTsconfigDeclarationDir: true,
   }),
   babel({
     babelHelpers: 'runtime',
@@ -26,9 +26,9 @@ export default [
   {
     input: 'src/index.ts',
     output: [
-      { file: './dist/main.cjs.js', format: 'cjs', name: 'gather', exports: 'default', },
-      { file: './dist/main.module.js', format: 'es', name: 'gather', exports: 'default', },
-      { file: './dist/main.umd.js', format: 'umd', name: 'gather', exports: 'default', }
+      { file: './dist/gather.cjs.js', format: 'cjs', name: 'gather', exports: 'default', },
+      { file: './dist/gather.module.js', format: 'es' },
+      { file: './dist/gather.js', format: 'iife', name: 'gather' }
     ],
     // external: [/@babel\/runtime-corejs3/],
     plugins,
