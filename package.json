@@ -1,8 +1,7 @@
 {
   "name": "th-gather",
   "version": "0.0.3",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
+  "main": "./dist/main.umd.js",
   "repository": "https://github.com/thomas-void0/th-gather",
   "author": "thomas-void0",
   "license": "MIT",

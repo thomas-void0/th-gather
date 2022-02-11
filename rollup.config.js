@@ -4,8 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
-const pkg = require('./package.json');
-
 const plugins = [
   resolve(),
   commonjs(),
@@ -27,12 +25,11 @@ const plugins = [
 export default [
   {
     input: 'src/index.ts',
-    output: {
-      file: `dist/gather-${pkg.version}.js`,
-      format: 'iife',
-      name: 'gather',
-      exports: 'default',
-    },
+    output: [
+      { file: './dist/main.cjs.js', format: 'cjs', name: 'gather', exports: 'default', },
+      { file: './dist/main.module.js', format: 'es', name: 'gather', exports: 'default', },
+      { file: './dist/main.umd.js', format: 'umd', name: 'gather', exports: 'default', }
+    ],
     // external: [/@babel\/runtime-corejs3/],
     plugins,
   },

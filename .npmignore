@@ -1,10 +1,10 @@
 /.babelrc
-/index.ts
 /.gitignore
 /rollup.config.js
 /tsconfig.json
-/commitlint.config.js
-/.husky
 /.prettierrc.js
 /.eslintignore
 /.eslintrc.js
+/.editorconfig
+/public
+/clear.js
