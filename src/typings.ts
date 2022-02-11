@@ -11,7 +11,7 @@ export interface BaseMsg {
   // 屏幕宽高
   sr: string;
   // 表示用户的唯一值
-  uuid:string,
+  uuid: string;
   // 时间
   gmt: string;
   // devicePixelRatio
@@ -69,55 +69,55 @@ export interface StaticMsg extends BaseMsg {
 
 //配置接口请求
 export interface XMLType extends BaseMsg {
-  type:"interface";
+  type: 'interface';
   //接口请求地址
-  url:string;
+  url: string;
   //接口耗时
-  tc:number,
+  tc: number;
   //状态码
-  cd:number,
+  cd: number;
   //发送请求时间
-  rq:string,
+  rq: string;
   //接受响应时间
-  rp:string
+  rp: string;
 }
 
 //点击类型统计
-export interface PvType extends BaseMsg{
-  type:"pv",
+export interface PvType extends BaseMsg {
+  type: 'pv';
   //路由地址
-  pathname:string,
+  pathname: string;
   //上一个跳转地址
-  from:string,
+  from: string;
   //网页标题
-  title:string,
+  title: string;
   //持续时间
-  stay:number
+  stay: number;
 }
 
-export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType
+export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType;
 
 export interface Options {
   /* 上报项目key值 */
-  projectKey: string,
+  projectKey: string;
   /* 上报地址 */
-  url: string,
+  url: string;
   /* 需要收集的字段key值 */
-  gatherKeys: Msg[],
+  gatherKeys?: Msg[];
   /* 扩展函数，在init的时候被调用。可以接受到记录对象 */
-  callback?: (dispatchData:(arg:any)=>void) => void,
+  callback?: (dispatchData: (arg: any) => void) => void;
   /* 上报频率默认10条 */
-  frequency?:number,
+  frequency?: number;
   /* 是否不上报数量不足的记录 */
-  isDiscard?:boolean,
+  isDiscard?: boolean;
   /* 是否监听路由信息 */
-  isRoutes?:boolean,
+  isRoutes?: boolean;
   /* 是否监听浏览器性能信息 */
-  isPerformance?:boolean,
+  isPerformance?: boolean;
   /* 是否监听promise错误 */
-  isPromiseError?:boolean,
+  isPromiseError?: boolean;
   /* 是否监听页面资源错误 */
-  isResourceError?:boolean,
+  isResourceError?: boolean;
   /* 是否监听接口请求信息 */
-  isRequest?:boolean
+  isRequest?: boolean;
 }
