@@ -42,19 +42,7 @@ export default function init(options: Options): void {
   }
 
   if (!options.gatherKeys) {
-    window[CONFIG.KEY].gatherKeys = [
-      'key',
-      'o',
-      'ua',
-      'ul',
-      'ct',
-      'vp',
-      'sr',
-      'uuid',
-      'gmt',
-      'dpr',
-      'rf',
-    ];
+    window[CONFIG.KEY].gatherKeys = CONFIG.defaultGatherKeys;
   }
 
   // 监听接口请求

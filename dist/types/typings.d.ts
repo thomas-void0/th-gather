@@ -53,8 +53,8 @@ export declare type Msg = Merge<BaseMsg, ExtraMsg>;
 export interface Options {
     projectKey: string;
     url: string;
-    gatherKeys?: BaseMsg[];
-    callback?: (dispatchData: (arg: any) => void) => void;
+    gatherKeys?: (keyof BaseMsg)[];
+    callback?: (dispatchData: (arg: ExtraMsg) => void) => void;
     frequency?: number;
     isDiscard?: boolean;
     isRoutes?: boolean;
