@@ -50,31 +50,7 @@ init({
 
 上报的数据由`基本数据 + 对应类型数据`组成(**使用 gatherKeys 编辑的时候，只能编辑基本数据字段**)，如下所示：
 
-```js
-{
-  key: 'pc_project';
-  o: 'http://dev.a.newrank.cn:8080/year/media';
-  ua: '(iPhone; CPU iPhone OS 10_3_1 like Mac OS X) safari';
-  ul: 'zh-CN';
-  ct: '4g';
-  vp: '414*896';
-  sr: '414*896';
-  uuid: '88707b0ebd2caeef9b299f7db6bba229';
-  gmt: '2022-2-14 9:50:4:917';
-  dpr: 2;
-  rf: 'http://dev.a.newrank.cn:8080/year/media';
-  bt: 79.5;
-  dns: 0;
-  drt: 306.40000000596046;
-  dt: 308.2999999821186;
-  lt: 388;
-  nv: 1;
-  rt: 1.4000000059604645;
-  tcp: 0;
-  ttfb: 4.299999982118607;
-  type: 'performance';
-}
-```
+![fef1f9ed0790da2a311cee17b508673](https://user-images.githubusercontent.com/48620706/153793614-9baeb0bd-bac3-493a-af49-9d940ed0e896.png)
 
 # 四、收集字段含义
 
