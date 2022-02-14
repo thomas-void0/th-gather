@@ -41,6 +41,22 @@ export default function init(options: Options): void {
     window[CONFIG.KEY] = { ...options, frequency: 10 };
   }
 
+  if (!options.gatherKeys) {
+    window[CONFIG.KEY].gatherKeys = [
+      'key',
+      'o',
+      'ua',
+      'ul',
+      'ct',
+      'vp',
+      'sr',
+      'uuid',
+      'gmt',
+      'dpr',
+      'rf',
+    ];
+  }
+
   // 监听接口请求
   if (isRequest) {
     listenerRequest();

@@ -50,7 +50,12 @@ const getUA = (): string => {
 // 获取基本信息
 const getBaseMsg = (): BaseMsg => {
   const ct = window.navigator['connection'];
-  return {
+
+  // 检测字段配置
+  const keys: (keyof BaseMsg)[] = window[CONFIG.KEY].gatherKeys;
+
+  const _data: BaseMsg = {
+    key: window[CONFIG.KEY].projectKey,
     // 当前页面路径
     o: window.location.href,
     // ua
@@ -58,6 +63,7 @@ const getBaseMsg = (): BaseMsg => {
     // 浏览器语言
     ul: window.navigator.language,
     // 网络类型
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     ct: ct ? ct.effectiveType : '',
     // 浏览器宽高
@@ -66,10 +72,16 @@ const getBaseMsg = (): BaseMsg => {
     sr: screen.width + '*' + screen.height,
     uuid: getId(),
     gmt: format(),
-    key: window[CONFIG.KEY].projectKey,
     dpr: window.devicePixelRatio,
     rf: document.referrer,
   };
+
+  return keys.reduce((prev, k) => {
+    if (_data[k]) {
+      prev[k] = _data[k];
+    }
+    return prev;
+  }, {} as any);
 };
 
 export default getBaseMsg;
