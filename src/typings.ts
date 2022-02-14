@@ -1,3 +1,4 @@
+import Merge from './libs/merge';
 export interface BaseMsg {
   // 项目key
   key: string;
@@ -22,7 +23,7 @@ export interface BaseMsg {
   rf: string;
 }
 
-export interface Performance extends BaseMsg {
+export interface Performance {
   type: 'performance';
   // dns查询时间
   dns: number;
@@ -44,7 +45,7 @@ export interface Performance extends BaseMsg {
   nv: number;
 }
 
-export interface ErrorMsg extends BaseMsg {
+export interface ErrorMsg {
   type: 'error';
   // 错误种类
   st: string;
@@ -57,7 +58,7 @@ export interface ErrorMsg extends BaseMsg {
 }
 
 //配置接口请求
-export interface XMLType extends BaseMsg {
+export interface XMLType {
   type: 'interface';
   //接口请求地址
   url: string;
@@ -72,7 +73,7 @@ export interface XMLType extends BaseMsg {
 }
 
 // 路由类型统计
-export interface PvType extends BaseMsg {
+export interface PvType {
   type: 'pv';
   //路由地址
   pathname: string;
@@ -84,7 +85,17 @@ export interface PvType extends BaseMsg {
   stay: number;
 }
 
-export type Msg = XMLType | Performance | ErrorMsg | PvType;
+export type ExtraMsg =
+  | XMLType
+  | Performance
+  | ErrorMsg
+  | PvType
+  | {
+      type: string;
+      [propKey: string]: any;
+    };
+
+export type Msg = Merge<BaseMsg, ExtraMsg>;
 
 export interface Options {
   /* 上报项目key值 */

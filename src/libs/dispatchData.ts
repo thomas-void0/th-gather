@@ -1,5 +1,6 @@
-import { Msg } from '../typings';
+import { ExtraMsg, Msg } from '../typings';
 import * as CONFIG from '../config';
+import getBaseMsg from './getBaseMsg';
 
 //读取浏览器中的信息记录
 export const getSessionStorage = (): Msg[] | Array<any> => {
@@ -35,9 +36,10 @@ let loading = false;
  * @param data Msg
  * @param action boolean 是否要立即进行数据上报
  */
-export default function dispatchData(data: Msg): void {
+export default function dispatchData(data: ExtraMsg): void {
   //设置浏览器中的存储
-  const list: Msg[] | undefined = setLocalStorage(data);
+  const _data = { ...getBaseMsg(), ...data };
+  const list: Msg[] | undefined = setLocalStorage(_data);
   //如果有数据，同时loading为false
   if (list && !loading) {
     loading = true;

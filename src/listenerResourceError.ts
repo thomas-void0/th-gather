@@ -1,11 +1,9 @@
-import getBaseMsg from './libs/getBaseMsg';
 import dispatchData from './libs/dispatchData';
 import { ErrorMsg } from './typings';
 
 // js错误
 export function jsError(error: ErrorEvent): ErrorMsg {
   return {
-    ...getBaseMsg(),
     type: 'error',
     st: 'js',
     file: error.filename,
@@ -21,7 +19,6 @@ export function jsError(error: ErrorEvent): ErrorMsg {
 // 资源异常
 export function resourceError(e: any): ErrorMsg {
   return {
-    ...getBaseMsg(),
     type: 'error',
     st: 'resource',
     file: e.target.src,

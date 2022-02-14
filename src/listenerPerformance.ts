@@ -1,6 +1,5 @@
 // 监听用户浏览器信息
-import dispatchData from "./libs/dispatchData";
-import getBaseMsg from './libs/getBaseMsg';
+import dispatchData from './libs/dispatchData';
 import { Performance } from './typings';
 
 export interface Perfaormance {
@@ -30,7 +29,6 @@ const performance = (): Performance => {
   }
 
   return {
-    ...getBaseMsg(),
     type: 'performance',
     // dns查询时间
     dns: timing.domainLookupEnd - timing.domainLookupStart,
@@ -48,13 +46,14 @@ const performance = (): Performance => {
     rt: timing.responseEnd - timing.responseStart,
     lt: timing.loadEventEnd - timing.fetchStart,
     //跳转方式
-    nv: window.performance.navigation.type
+    nv: window.performance.navigation.type,
   };
 };
 
 //一定时间后开始监听performance
-const _listenerPerformance = () => setTimeout(() => dispatchData(performance()), 300);
+const _listenerPerformance = () =>
+  setTimeout(() => dispatchData(performance()), 300);
 
-export default function listenerPerformance(){
+export default function listenerPerformance() {
   window.addEventListener('load', _listenerPerformance, false);
 }
