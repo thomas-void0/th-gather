@@ -66,7 +66,7 @@ const getBaseMsg = (): BaseMsg => {
     sr: screen.width + '*' + screen.height,
     uuid: getId(),
     gmt: format(),
-    key: window[CONFIG.KEY].key,
+    key: window[CONFIG.KEY].projectKey,
     dpr: window.devicePixelRatio,
     rf: document.referrer,
   };

@@ -38,7 +38,7 @@ export interface StaticMsg extends BaseMsg {
     decodedBodySize: number;
 }
 export interface XMLType extends BaseMsg {
-    type: "interface";
+    type: 'interface';
     url: string;
     tc: number;
     cd: number;
@@ -46,7 +46,7 @@ export interface XMLType extends BaseMsg {
     rp: string;
 }
 export interface PvType extends BaseMsg {
-    type: "pv";
+    type: 'pv';
     pathname: string;
     from: string;
     title: string;
@@ -56,7 +56,7 @@ export declare type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType;
 export interface Options {
     projectKey: string;
     url: string;
-    gatherKeys: Msg[];
+    gatherKeys?: Msg[];
     callback?: (dispatchData: (arg: any) => void) => void;
     frequency?: number;
     isDiscard?: boolean;

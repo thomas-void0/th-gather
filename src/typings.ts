@@ -1,5 +1,7 @@
 export interface BaseMsg {
+  // 项目key
   key: string;
+  // 当前页面路径
   o: string;
   ua: string;
   // 浏览器语言
@@ -22,6 +24,7 @@ export interface BaseMsg {
 
 export interface Performance extends BaseMsg {
   type: 'performance';
+  // dns查询时间
   dns: number;
   // tcp连接耗时
   tcp: number;
@@ -53,20 +56,6 @@ export interface ErrorMsg extends BaseMsg {
   msg: string;
 }
 
-export interface StaticMsg extends BaseMsg {
-  type: 'static';
-  // 文件url
-  name: string;
-  // 资源类型
-  initiatorType: string;
-  // 持续时间
-  duration: number;
-  // 请求资源的网络协议
-  nextHopProtocol: string;
-  // 资源大小
-  decodedBodySize: number;
-}
-
 //配置接口请求
 export interface XMLType extends BaseMsg {
   type: 'interface';
@@ -82,7 +71,7 @@ export interface XMLType extends BaseMsg {
   rp: string;
 }
 
-//点击类型统计
+// 路由类型统计
 export interface PvType extends BaseMsg {
   type: 'pv';
   //路由地址
@@ -95,7 +84,7 @@ export interface PvType extends BaseMsg {
   stay: number;
 }
 
-export type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType;
+export type Msg = XMLType | Performance | ErrorMsg | PvType;
 
 export interface Options {
   /* 上报项目key值 */
@@ -103,7 +92,7 @@ export interface Options {
   /* 上报地址 */
   url: string;
   /* 需要收集的字段key值 */
-  gatherKeys?: Msg[];
+  gatherKeys?: BaseMsg[];
   /* 扩展函数，在init的时候被调用。可以接受到记录对象 */
   callback?: (dispatchData: (arg: any) => void) => void;
   /* 上报频率默认10条 */
