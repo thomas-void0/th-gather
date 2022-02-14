@@ -4,6 +4,8 @@
 
 # 安装和使用
 
+## 安装
+
 ```npm
 npm i th-gather -D
 ```
@@ -12,4 +14,15 @@ npm i th-gather -D
 
 ```yarn
 yarn add th-gather -D
+```
+
+## 使用
+
+```ts
+import init from 'th-gather';
+
+init({
+  projectKey: 'pc_project',
+  url: '/log/record',
+});
 ```
