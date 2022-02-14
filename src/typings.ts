@@ -103,9 +103,9 @@ export interface Options {
   /* 上报地址 */
   url: string;
   /* 需要收集的字段key值 */
-  gatherKeys?: BaseMsg[];
+  gatherKeys?: (keyof BaseMsg)[];
   /* 扩展函数，在init的时候被调用。可以接受到记录对象 */
-  callback?: (dispatchData: (arg: any) => void) => void;
+  callback?: (dispatchData: (arg: ExtraMsg) => void) => void;
   /* 上报频率默认10条 */
   frequency?: number;
   /* 是否不上报数量不足的记录 */

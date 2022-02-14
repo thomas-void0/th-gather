@@ -1,3 +1,4 @@
+import Merge from './libs/merge';
 export interface BaseMsg {
     key: string;
     o: string;
@@ -11,7 +12,7 @@ export interface BaseMsg {
     dpr: number;
     rf: string;
 }
-export interface Performance extends BaseMsg {
+export interface Performance {
     type: 'performance';
     dns: number;
     tcp: number;
@@ -23,21 +24,13 @@ export interface Performance extends BaseMsg {
     lt: number;
     nv: number;
 }
-export interface ErrorMsg extends BaseMsg {
+export interface ErrorMsg {
     type: 'error';
     st: string;
     file: string;
     msg: string;
 }
-export interface StaticMsg extends BaseMsg {
-    type: 'static';
-    name: string;
-    initiatorType: string;
-    duration: number;
-    nextHopProtocol: string;
-    decodedBodySize: number;
-}
-export interface XMLType extends BaseMsg {
+export interface XMLType {
     type: 'interface';
     url: string;
     tc: number;
@@ -45,18 +38,22 @@ export interface XMLType extends BaseMsg {
     rq: string;
     rp: string;
 }
-export interface PvType extends BaseMsg {
+export interface PvType {
     type: 'pv';
     pathname: string;
     from: string;
     title: string;
     stay: number;
 }
-export declare type Msg = StaticMsg | XMLType | Performance | ErrorMsg | PvType;
+export declare type ExtraMsg = XMLType | Performance | ErrorMsg | PvType | {
+    type: string;
+    [propKey: string]: any;
+};
+export declare type Msg = Merge<BaseMsg, ExtraMsg>;
 export interface Options {
     projectKey: string;
     url: string;
-    gatherKeys?: Msg[];
+    gatherKeys?: BaseMsg[];
     callback?: (dispatchData: (arg: any) => void) => void;
     frequency?: number;
     isDiscard?: boolean;
