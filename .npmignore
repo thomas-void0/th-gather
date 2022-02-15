@@ -2,7 +2,11 @@
 /.gitignore
 /rollup.config.js
 /tsconfig.json
-/.prettierrc.js
 /.eslintignore
 /.eslintrc.js
 /.editorconfig
+/src
+/public
+/.prettierrc
+/yarn-error.log
+/.vscode
