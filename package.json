@@ -1,6 +1,6 @@
 {
   "name": "th-gather",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "main": "./dist/gather.cjs.js",
   "module": "./dist/gather.module.js",
   "types": "./dist/types/index.d.ts",
@@ -16,7 +16,14 @@
   },
   "keywords": [
     "th-gather",
-    "gather"
+    "gather",
+    "全埋点",
+    "全埋点sdk",
+    "前端全埋点",
+    "前端全埋点sdk",
+    "用户行为收集",
+    "收集",
+    "collect"
   ],
   "homepage": "https://github.com/thomas-void0/th-gather#readme",
   "dependencies": {
