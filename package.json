@@ -1,6 +1,6 @@
 {
   "name": "th-gather",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/gather.cjs.js",
   "module": "./dist/gather.module.js",
   "types": "./dist/types/index.d.ts",
@@ -18,6 +18,7 @@
     "th-gather",
     "gather",
     "全埋点",
+    "埋点",
     "全埋点sdk",
     "前端全埋点",
     "前端全埋点sdk",
