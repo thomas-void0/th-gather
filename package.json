@@ -1,6 +1,6 @@
 {
   "name": "th-gather",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "./dist/gather.cjs.js",
   "module": "./dist/gather.module.js",
   "types": "./dist/types/index.d.ts",
