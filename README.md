@@ -25,7 +25,7 @@ init({
   projectKey: 'pc_project',
   url: '/log/record',
   isLog: true,
-  beforeInit: () => {
+  beforeInit() => {
     console.log('init start...');
   },
   mergeMsg() {
