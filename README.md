@@ -45,22 +45,22 @@ init({
 
 # 二、初始化选项
 
-|      参数       |                           类型                            |                                                   描述                                                   |                            默认值                            |
-| :-------------: | :-------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------: |
-|   projectKey    |                          string                           |                                    自定义的项目标识，方便区分多个项目                                    |                              -                               |
-|       url       |                          string                           |                                                上报的地址                                                |                              -                               |
-|   gatherKeys    |                         BaseMsg[]                         |                                          配置需要收集的基本信息                                          | ['key','o','ua','ul','ct','vp','sr','uuid','gmt','dpr','rf'] |
-|    frequency    |                          number                           |                                    上报频率,默认为每满 10 条上报一次                                     |                              10                              |
-|    isDiscard    |                          boolean                          |                                     是否在窗口关闭时，上报剩余的数据                                     |                             true                             |
-|    isRoutes     |                          boolean                          |                                           是否收集路由跳转信息                                           |                             true                             |
-|  isPerformance  |                          boolean                          |                                          是否监听浏览器性能信息                                          |                             true                             |
-| isPromiseError  |                          boolean                          |                        是否监听 promise 错误（没有被 reject 处理的 promise 错误）                        |                             true                             |
-| isResourceError |                          boolean                          |                                           是否监听页面资源错误                                           |                             true                             |
-|    isRequest    |                          boolean                          |                                           是否监听接口请求信息                                           |                             true                             |
-|      isLog      |                          boolean                          |                                             是否需要打印日志                                             |                              -                               |
-|   beforeInit    |                         ()=>void                          |                                            脚本初始化之前运行                                            |                              -                               |
-|    mergeMsg     | () => (Record<string,any> or Promise<Record<string,any>>) | 返回的值会被合并到每一条上报数据中, 可以用于从接口中读取用户信息, 此函数优先级在内置埋点事件开始监听之前 |                              -                               |
-|  beforeSendMsg  |     (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg      |                                   上报数据之前，可以在此对数据进行加工                                   |                              -                               |
+|      参数       |                           类型                            |                                                   描述                                                   |   默认值    |
+| :-------------: | :-------------------------------------------------------: | :------------------------------------------------------------------------------------------------------: | :---------: |
+|   projectKey    |                          string                           |                                    自定义的项目标识，方便区分多个项目                                    |      -      |
+|       url       |                          string                           |                                                上报的地址                                                |      -      |
+|   gatherKeys    |                         BaseMsg[]                         |                                          配置需要收集的基本信息                                          | defaultKeys |
+|    frequency    |                          number                           |                                    上报频率,默认为每满 10 条上报一次                                     |     10      |
+|    isDiscard    |                          boolean                          |                                     是否在窗口关闭时，上报剩余的数据                                     |    true     |
+|    isRoutes     |                          boolean                          |                                           是否收集路由跳转信息                                           |    true     |
+|  isPerformance  |                          boolean                          |                                          是否监听浏览器性能信息                                          |    true     |
+| isPromiseError  |                          boolean                          |                        是否监听 promise 错误（没有被 reject 处理的 promise 错误）                        |    true     |
+| isResourceError |                          boolean                          |                                           是否监听页面资源错误                                           |    true     |
+|    isRequest    |                          boolean                          |                                           是否监听接口请求信息                                           |    true     |
+|      isLog      |                          boolean                          |                                             是否需要打印日志                                             |      -      |
+|   beforeInit    |                         ()=>void                          |                                            脚本初始化之前运行                                            |      -      |
+|    mergeMsg     | () => (Record<string,any> or Promise<Record<string,any>>) | 返回的值会被合并到每一条上报数据中, 可以用于从接口中读取用户信息, 此函数优先级在内置埋点事件开始监听之前 |      -      |
+|  beforeSendMsg  |     (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg      |                                   上报数据之前，可以在此对数据进行加工                                   |      -      |
 
 # 三、上报数据格式
 
@@ -71,6 +71,8 @@ init({
 # 四、收集字段含义
 
 ## 4.1 基本数据
+
+`默认包含以下选项['key','o','ua','ul','ct','vp','sr','uuid','gmt','dpr','rf']`
 
 | 字段 |                                                描述                                                |
 | :--: | :------------------------------------------------------------------------------------------------: |
