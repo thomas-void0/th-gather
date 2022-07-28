@@ -7,13 +7,13 @@
 ## 安装
 
 ```npm
-npm i th-gather -D
+npm i th-gather
 ```
 
 或者
 
 ```yarn
-yarn add th-gather -D
+yarn add th-gather
 ```
 
 ## 使用
