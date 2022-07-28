@@ -1,7 +1,8 @@
-import getUuid from './uuid';
+import * as CONFIG from '../config';
+
 import { BaseMsg } from '../typings';
 import format from './format';
-import * as CONFIG from '../config';
+import getUuid from './uuid';
 
 // 浏览器宽高
 const getWH = () => {
@@ -12,12 +13,18 @@ const getWH = () => {
 };
 
 const getId = () => {
-  let uuid = window.localStorage.getItem('$$_th_gather_uuid');
+  let uuid = window.localStorage.getItem(CONFIG.UUID);
   if (!uuid) {
     uuid = getUuid();
-    window.localStorage.setItem('$$_th_gather_uuid', uuid);
+    window.localStorage.setItem(CONFIG.UUID, uuid);
   }
   return uuid;
+};
+
+// 获取需要合并的数据
+const getMergeMsg = () => {
+  const msg = window.sessionStorage.getItem(CONFIG.MERGE_KEY);
+  return msg ? JSON.parse(msg) : {};
 };
 
 //获取ua信息
@@ -76,12 +83,18 @@ const getBaseMsg = (): BaseMsg => {
     rf: document.referrer,
   };
 
-  return keys.reduce((prev, k) => {
-    if (_data[k]) {
-      prev[k] = _data[k];
-    }
-    return prev;
-  }, {} as any);
+  return keys.reduce(
+    (prev, k) => {
+      if (_data[k]) {
+        prev[k] = _data[k];
+      }
+      return prev;
+    },
+    {
+      // 获取merge信息
+      ...getMergeMsg(),
+    } as any
+  );
 };
 
 export default getBaseMsg;

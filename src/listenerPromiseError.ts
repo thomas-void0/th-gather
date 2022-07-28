@@ -1,7 +1,7 @@
 // 监听页面promise错误，没有被reject处理的reject
 
-import dispatchData from './libs/dispatchData';
 import { ErrorMsg } from './typings';
+import dispatchData from './libs/dispatchData';
 
 export function promiseError(e): ErrorMsg {
   return {
