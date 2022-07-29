@@ -10,3 +10,4 @@
 /.prettierrc
 /yarn-error.log
 /.vscode
+/test

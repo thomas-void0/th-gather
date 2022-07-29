@@ -2,7 +2,7 @@ import * as CONFIG from '../config';
 
 import { BaseMsg } from '../typings';
 import format from './format';
-import getUuid from './uuid';
+import getLogId from './getLogId';
 
 // 浏览器宽高
 const getWH = () => {
@@ -10,15 +10,6 @@ const getWH = () => {
   const h = document.documentElement.clientHeight || document.body.clientHeight;
 
   return w + '*' + h;
-};
-
-const getId = () => {
-  let uuid = window.localStorage.getItem(CONFIG.UUID);
-  if (!uuid) {
-    uuid = getUuid();
-    window.localStorage.setItem(CONFIG.UUID, uuid);
-  }
-  return uuid;
 };
 
 // 获取需要合并的数据
@@ -77,7 +68,7 @@ const getBaseMsg = (): BaseMsg => {
     vp: getWH(),
     // 屏幕宽高
     sr: screen.width + '*' + screen.height,
-    uuid: getId(),
+    logId: getLogId(),
     gmt: format(),
     dpr: window.devicePixelRatio,
     rf: document.referrer,

@@ -25,7 +25,7 @@ init({
   projectKey: 'pc_project',
   url: '/log/record',
   isLog: true,
-  beforeInit() => {
+  beforeInit() {
     console.log('init start...');
   },
   mergeMsg() {
@@ -72,21 +72,21 @@ init({
 
 ## 4.1 基本数据
 
-`默认包含以下选项['key','o','ua','ul','ct','vp','sr','uuid','gmt','dpr','rf']`
+`默认包含以下选项['key','o','ua','ul','ct','vp','sr','logId','gmt','dpr','rf']`
 
-| 字段 |                                                描述                                                |
-| :--: | :------------------------------------------------------------------------------------------------: |
-| key  |                                            项目 key 值                                             |
-|  o   |                                            当前页面路径                                            |
-|  ua  |                                                 ua                                                 |
-|  ul  |                                             浏览器语言                                             |
-|  ct  |                                              网络类型                                              |
-|  vp  |                                             浏览器宽高                                             |
-|  sr  |                                              屏幕宽高                                              |
-| uuid | 表示用户的唯一值，第一次随机生成一个 uuid。然后存储在用户的 localStorage 里面,以后每次都使用这个值 |
-| gmt  |                                            数据生成时间                                            |
-| dpr  |                                          devicePixelRatio                                          |
-|  rf  |                                              referer                                               |
+| 字段  |       描述       |
+| :---: | :--------------: |
+|  key  |   项目 key 值    |
+|   o   |   当前页面路径   |
+|  ua   |        ua        |
+|  ul   |    浏览器语言    |
+|  ct   |     网络类型     |
+|  vp   |    浏览器宽高    |
+|  sr   |     屏幕宽高     |
+| logId | 每条记录的 id 值 |
+|  gmt  |   数据生成时间   |
+|  dpr  | devicePixelRatio |
+|  rf   |     referer      |
 
 ## 4.2 浏览器性能数据
 

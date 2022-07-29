@@ -7,7 +7,7 @@ export interface BaseMsg {
     ct: string;
     vp: string;
     sr: string;
-    uuid: string;
+    logId: string;
     gmt: string;
     dpr: number;
     rf: string;
