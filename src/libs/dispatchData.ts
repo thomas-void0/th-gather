@@ -40,12 +40,12 @@ let loading = false;
  * @param action boolean 是否要立即进行数据上报
  */
 export default function dispatchData(data: ExtraMsg): void {
-  const { beforeSendMsg,isLog } =  window[CONFIG.KEY] as Options
+  const { beforeSendMsg, isLog, headers } = window[CONFIG.KEY] as Options;
   //设置浏览器中的存储
-  const o = { ...getBaseMsg(), ...data }
+  const o = { ...getBaseMsg(), ...data };
   const _data = beforeSendMsg ? beforeSendMsg(o) : o;
   // 打印Log
-  isLog && log(_data)
+  isLog && log(_data);
   const list: Msg[] | undefined = setLocalStorage(_data);
   //如果有数据，同时loading为false
   if (list && !loading) {
@@ -57,6 +57,7 @@ export default function dispatchData(data: ExtraMsg): void {
       credentials: 'include',
       method: 'post',
       body: formData,
+      headers,
     })
       .then(() => {
         loading = false;

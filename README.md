@@ -61,6 +61,7 @@ init({
 |   beforeInit    |                         ()=>void                          |                                            脚本初始化之前运行                                            |      -      |
 |    mergeMsg     | () => (Record<string,any> or Promise<Record<string,any>>) | 返回的值会被合并到每一条上报数据中, 可以用于从接口中读取用户信息, 此函数优先级在内置埋点事件开始监听之前 |      -      |
 |  beforeSendMsg  |     (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg      |                                   上报数据之前，可以在此对数据进行加工                                   |      -      |
+|     headers     |                          Object                           |                 上报请求头, 因为页面卸载上报的时候无法设置请求头，可能会导致部分数据丢失                 |      -      |
 
 # 三、上报数据格式
 

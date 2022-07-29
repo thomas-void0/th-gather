@@ -65,4 +65,5 @@ export interface Options {
     mergeMsg?: () => Record<string, any> | Promise<Record<string, any>>;
     beforeSendMsg?: (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg;
     isLog?: boolean;
+    headers?: Record<string, any>;
 }

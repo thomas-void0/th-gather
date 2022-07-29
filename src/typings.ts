@@ -127,4 +127,6 @@ export interface Options {
   beforeSendMsg?: (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg;
   /* 是否需要打印日志 */
   isLog?: boolean;
+  /* 上报请求头, 页面卸载上报的时候无法设置请求头，可能会导致部分数据丢失 */
+  headers?: Record<string, any>;
 }
