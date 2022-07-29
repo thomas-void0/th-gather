@@ -64,9 +64,9 @@ init({
 
 # 三、上报数据格式
 
-上报的数据由`基本数据 + 对应类型数据`组成(**使用 gatherKeys 编辑的时候，只能编辑基本数据字段**)，如下所示：
+上报的数据由`基本数据 + 对应类型数据`组成(**使用 gatherKeys 编辑的时候，只能编辑基本数据字段**)，收集的示例数据如下所示：
 
-![fef1f9ed0790da2a311cee17b508673](https://user-images.githubusercontent.com/48620706/153793614-9baeb0bd-bac3-493a-af49-9d940ed0e896.png)
+![image](https://user-images.githubusercontent.com/48620706/181671691-2c560695-e215-4b26-b892-811d969c6063.png)
 
 # 四、收集字段含义
 
