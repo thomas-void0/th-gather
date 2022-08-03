@@ -10,6 +10,7 @@ const plugins = [
   commonjs(),
   typescript({
     useTsconfigDeclarationDir: true,
+    exclude: ["/src/index.ts"]
   }),
   babel({
     babelHelpers: 'runtime',
