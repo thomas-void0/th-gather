@@ -1,6 +1,7 @@
 // 监听页面卸载
 
-import { KEY } from './config';
+import { KEY, MSG_KEY } from './config';
+
 import { getSessionStorage } from './libs/dispatchData';
 
 const listenerUnload = () => {
@@ -13,7 +14,7 @@ const listenerUnload = () => {
       const fd = new FormData();
       fd.append('value', JSON.stringify(list));
       window.navigator.sendBeacon(url, fd);
-      window.sessionStorage.clear(); //清除
+      window.sessionStorage.removeItem(MSG_KEY); //清除
     }
   });
 };

@@ -28,7 +28,7 @@ const setLocalStorage = (data: Msg): Msg[] | undefined => {
 //清除相应的数据存储
 const resetList = (): void => {
   msgList.splice(0, window[CONFIG.KEY].frequency);
-  window.sessionStorage.removeItem(window[CONFIG.KEY]);
+  window.sessionStorage.removeItem(CONFIG.MSG_KEY);
 };
 
 //是否在发送数据
