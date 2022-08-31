@@ -1,5 +1,4 @@
-import { ExtraMsg, Msg } from '../typings';
-export declare const getSessionStorage: () => Msg[] | Array<any>;
+import { ExtraMsg } from '../typings';
 /**
  * 上报数据数据
  * @param data Msg

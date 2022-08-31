@@ -27,7 +27,8 @@
   "homepage": "https://github.com/thomas-void0/th-gather#readme",
   "dependencies": {
     "ajax-hook": "2.0.3",
-    "snowflake-id": "^1.1.0"
+    "snowflake-id": "^1.1.0",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
