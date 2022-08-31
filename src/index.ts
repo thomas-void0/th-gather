@@ -1,6 +1,7 @@
-import * as CONFIG from './config';
+import { KEY, defaultGatherKeys } from './config';
+import { Msg, Options } from './typings';
 
-import { Options } from './typings';
+import Store from './libs/store';
 import isFunction from './libs/isFunction';
 import listenerPerformance from './listenerPerformance';
 import listenerPromiseError from './listenerPromiseError';
@@ -9,9 +10,9 @@ import listenerResourceError from './listenerResourceError';
 import listenerRoute from './listenerRoute';
 import listenerUnload from './listenerUnload';
 
-export default async function init(options: Options) {
+export default async function init(options: Options): Promise<void> {
   // 仅能初始化一次配置
-  if (window[CONFIG.KEY]) {
+  if (window[KEY]) {
     throw new Error('just initialized once');
   }
 
@@ -30,15 +31,18 @@ export default async function init(options: Options) {
     throw new Error("params error，'url' is required");
   }
 
-  // 挂载配置
-  if (options.frequency) {
-    window[CONFIG.KEY] = options;
-  } else {
-    window[CONFIG.KEY] = { ...options, frequency: 10 };
-  }
+  // 创建存储数据仓库
+  window[KEY] = {
+    store: new Store<Msg[]>([]),
+    ...options,
+  };
 
+  // 挂载配置
+  if (!options.frequency) {
+    window[KEY].frequency = 10;
+  }
   if (!options.gatherKeys) {
-    window[CONFIG.KEY].gatherKeys = CONFIG.defaultGatherKeys;
+    window[KEY].gatherKeys = defaultGatherKeys;
   }
 
   // 初始化开始
@@ -46,9 +50,9 @@ export default async function init(options: Options) {
 
   // 是否有需要合并的数据
   if (isFunction(mergeMsg)) {
-    const data = await mergeMsg();
     // 临时存储需要被合并的数据
-    window.sessionStorage.setItem(CONFIG.MERGE_KEY, JSON.stringify(data));
+    window[KEY].merge = await mergeMsg();
+    // window.sessionStorage.setItem(CONFIG.MERGE_KEY, JSON.stringify(data));
   }
 
   // 注册监听事件
@@ -63,7 +67,7 @@ function _registerListen() {
     isPromiseError = true,
     isResourceError = true,
     isRequest = true,
-  } = window[CONFIG.KEY];
+  } = window[KEY];
 
   // 监听接口请求
   if (isRequest) {

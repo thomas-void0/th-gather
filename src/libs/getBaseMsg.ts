@@ -1,6 +1,5 @@
-import * as CONFIG from '../config';
-
 import { BaseMsg } from '../typings';
+import { KEY } from '../config';
 import format from './format';
 import getLogId from './getLogId';
 
@@ -13,10 +12,10 @@ const getWH = () => {
 };
 
 // 获取需要合并的数据
-const getMergeMsg = () => {
-  const msg = window.sessionStorage.getItem(CONFIG.MERGE_KEY);
-  return msg ? JSON.parse(msg) : {};
-};
+// const getMergeMsg = () => {
+//   const msg = window.sessionStorage.getItem(CONFIG.MERGE_KEY);
+//   return msg ? JSON.parse(msg) : {};
+// };
 
 //获取ua信息
 const getUA = (): string => {
@@ -50,10 +49,10 @@ const getBaseMsg = (): BaseMsg => {
   const ct = window.navigator['connection'];
 
   // 检测字段配置
-  const keys: (keyof BaseMsg)[] = window[CONFIG.KEY].gatherKeys;
+  const { gatherKeys: keys, merge } = window[KEY];
 
   const _data: BaseMsg = {
-    key: window[CONFIG.KEY].projectKey,
+    key: window[KEY].projectKey,
     // 当前页面路径
     o: window.location.href,
     // ua
@@ -74,18 +73,14 @@ const getBaseMsg = (): BaseMsg => {
     rf: document.referrer,
   };
 
-  return keys.reduce(
-    (prev, k) => {
-      if (_data[k]) {
-        prev[k] = _data[k];
-      }
-      return prev;
-    },
-    {
-      // 获取merge信息
-      ...getMergeMsg(),
-    } as any
-  );
+  const init = merge ? { ...merge } : {};
+
+  return keys.reduce((prev, k) => {
+    if (_data[k]) {
+      prev[k] = _data[k];
+    }
+    return prev;
+  }, init as any);
 };
 
 export default getBaseMsg;
