@@ -1,7 +1,7 @@
-import getUuid from './uuid';
 import { BaseMsg } from '../typings';
+import { KEY } from '../config';
 import format from './format';
-import * as CONFIG from '../config';
+import getLogId from './getLogId';
 
 // 浏览器宽高
 const getWH = () => {
@@ -11,14 +11,11 @@ const getWH = () => {
   return w + '*' + h;
 };
 
-const getId = () => {
-  let uuid = window.localStorage.getItem('$$_th_gather_uuid');
-  if (!uuid) {
-    uuid = getUuid();
-    window.localStorage.setItem('$$_th_gather_uuid', uuid);
-  }
-  return uuid;
-};
+// 获取需要合并的数据
+// const getMergeMsg = () => {
+//   const msg = window.sessionStorage.getItem(CONFIG.MERGE_KEY);
+//   return msg ? JSON.parse(msg) : {};
+// };
 
 //获取ua信息
 const getUA = (): string => {
@@ -52,10 +49,10 @@ const getBaseMsg = (): BaseMsg => {
   const ct = window.navigator['connection'];
 
   // 检测字段配置
-  const keys: (keyof BaseMsg)[] = window[CONFIG.KEY].gatherKeys;
+  const { gatherKeys: keys, merge } = window[KEY];
 
   const _data: BaseMsg = {
-    key: window[CONFIG.KEY].projectKey,
+    key: window[KEY].projectKey,
     // 当前页面路径
     o: window.location.href,
     // ua
@@ -70,18 +67,20 @@ const getBaseMsg = (): BaseMsg => {
     vp: getWH(),
     // 屏幕宽高
     sr: screen.width + '*' + screen.height,
-    uuid: getId(),
+    logId: getLogId(),
     gmt: format(),
     dpr: window.devicePixelRatio,
     rf: document.referrer,
   };
+
+  const init = merge ? { ...merge } : {};
 
   return keys.reduce((prev, k) => {
     if (_data[k]) {
       prev[k] = _data[k];
     }
     return prev;
-  }, {} as any);
+  }, init as any);
 };
 
 export default getBaseMsg;

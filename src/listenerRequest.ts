@@ -1,7 +1,9 @@
 // 监听接口请求
-import { proxy, XhrResponse } from 'ajax-hook';
-import dispatchData from './libs/dispatchData';
+
+import { XhrResponse, proxy } from 'ajax-hook';
+
 import { XMLType } from './typings';
+import dispatchData from './libs/dispatchData';
 import format from './libs/format';
 
 //获取接口请求信息

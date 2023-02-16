@@ -1,29 +1,26 @@
-import { Options } from './typings';
+import { KEY, defaultGatherKeys } from './config';
+import { Msg, Options } from './typings';
+
+import Store from './libs/store';
+import isFunction from './libs/isFunction';
+import listenerPerformance from './listenerPerformance';
+import listenerPromiseError from './listenerPromiseError';
+import listenerRequest from './listenerRequest';
+import listenerResourceError from './listenerResourceError';
 import listenerRoute from './listenerRoute';
 import listenerUnload from './listenerUnload';
-import listenerResourceError from './listenerResourceError';
-import listenerRequest from './listenerRequest';
-import listenerPromiseError from './listenerPromiseError';
-import listenerPerformance from './listenerPerformance';
-import dispatchData from './libs/dispatchData';
-import * as CONFIG from './config';
 
-export default function init(options: Options): void {
+export default async function init(options: Options): Promise<void> {
   // 仅能初始化一次配置
-  if (window[CONFIG.KEY]) {
+  if (window[KEY]) {
     throw new Error('just initialized once');
   }
 
   const {
     projectKey, // 项目key
     url, // 上报地址
-    callback, // 回调函数
-    isDiscard = true, // 是否销毁上报
-    isRoutes = true,
-    isPerformance = true,
-    isPromiseError = true,
-    isResourceError = true,
-    isRequest = true,
+    beforeInit, // 初始化之前运行
+    mergeMsg, // 合并自定义数据到每一条数据中
   } = options;
 
   if (!projectKey) {
@@ -34,16 +31,43 @@ export default function init(options: Options): void {
     throw new Error("params error，'url' is required");
   }
 
+  // 创建存储数据仓库
+  window[KEY] = {
+    store: new Store<Msg[]>([]),
+    ...options,
+  };
+
   // 挂载配置
-  if (options.frequency) {
-    window[CONFIG.KEY] = options;
-  } else {
-    window[CONFIG.KEY] = { ...options, frequency: 10 };
+  if (!options.frequency) {
+    window[KEY].frequency = 10;
+  }
+  if (!options.gatherKeys) {
+    window[KEY].gatherKeys = defaultGatherKeys;
   }
 
-  if (!options.gatherKeys) {
-    window[CONFIG.KEY].gatherKeys = CONFIG.defaultGatherKeys;
+  // 初始化开始
+  isFunction(beforeInit) && beforeInit();
+
+  // 是否有需要合并的数据
+  if (isFunction(mergeMsg)) {
+    // 临时存储需要被合并的数据
+    window[KEY].merge = await mergeMsg();
+    // window.sessionStorage.setItem(CONFIG.MERGE_KEY, JSON.stringify(data));
   }
+
+  // 注册监听事件
+  _registerListen();
+}
+
+function _registerListen() {
+  const {
+    isDiscard = true, // 是否销毁上报
+    isRoutes = true,
+    isPerformance = true,
+    isPromiseError = true,
+    isResourceError = true,
+    isRequest = true,
+  } = window[KEY];
 
   // 监听接口请求
   if (isRequest) {
@@ -73,10 +97,5 @@ export default function init(options: Options): void {
   // 监听路由信息
   if (isRoutes) {
     listenerRoute();
-  }
-
-  // 调用回调监听
-  if (callback instanceof Function) {
-    callback(dispatchData);
   }
 }

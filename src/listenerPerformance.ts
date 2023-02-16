@@ -1,6 +1,7 @@
 // 监听用户浏览器信息
-import dispatchData from './libs/dispatchData';
+
 import { Performance } from './typings';
+import dispatchData from './libs/dispatchData';
 
 export interface Perfaormance {
   dns: number;

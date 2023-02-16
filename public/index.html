@@ -15,9 +15,17 @@
   </head>
   <body>
     <h1>rollup-app</h1>
-    <script src="gather.js"></script>
-    <script>
-      console.log(window.gather({ projectKey: 'pc', url: '/husa' }));
+    <script type="module">
+      import init from '../dist/gather.module.js';
+      init({
+        projectKey: 'pc_project',
+        url: 'http://test.log.cn/record',
+        isLog: true,
+        frequency: 1,
+        beforeInit() {
+          console.log('init start...');
+        },
+      });
     </script>
   </body>
 </html>

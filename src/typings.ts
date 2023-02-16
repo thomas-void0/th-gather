@@ -1,4 +1,5 @@
 import Merge from './libs/merge';
+
 export interface BaseMsg {
   // 项目key
   key: string;
@@ -13,8 +14,8 @@ export interface BaseMsg {
   vp: string;
   // 屏幕宽高
   sr: string;
-  // 表示用户的唯一值
-  uuid: string;
+  // 表示当条记录的唯一值
+  logId: string;
   // 时间
   gmt: string;
   // devicePixelRatio
@@ -104,8 +105,6 @@ export interface Options {
   url: string;
   /* 需要收集的字段key值 */
   gatherKeys?: (keyof BaseMsg)[];
-  /* 扩展函数，在init的时候被调用。可以接受到记录对象 */
-  callback?: (dispatchData: (arg: ExtraMsg) => void) => void;
   /* 上报频率默认10条 */
   frequency?: number;
   /* 是否不上报数量不足的记录 */
@@ -120,4 +119,14 @@ export interface Options {
   isResourceError?: boolean;
   /* 是否监听接口请求信息 */
   isRequest?: boolean;
+  /* 脚本初始化之前运行 */
+  beforeInit?: () => void;
+  /* 返回的值会被合并到每一条上报数据中, 可以用于从接口中读取用户信息 */
+  mergeMsg?: () => Record<string, any> | Promise<Record<string, any>>;
+  /* 上报数据之前，可以在此对数据进行加工 */
+  beforeSendMsg?: (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg;
+  /* 是否需要打印日志 */
+  isLog?: boolean;
+  /* 上报请求头, 页面卸载上报的时候无法设置请求头，可能会导致部分数据丢失 */
+  headers?: Record<string, any>;
 }

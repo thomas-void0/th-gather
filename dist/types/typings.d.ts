@@ -7,7 +7,7 @@ export interface BaseMsg {
     ct: string;
     vp: string;
     sr: string;
-    uuid: string;
+    logId: string;
     gmt: string;
     dpr: number;
     rf: string;
@@ -54,7 +54,6 @@ export interface Options {
     projectKey: string;
     url: string;
     gatherKeys?: (keyof BaseMsg)[];
-    callback?: (dispatchData: (arg: ExtraMsg) => void) => void;
     frequency?: number;
     isDiscard?: boolean;
     isRoutes?: boolean;
@@ -62,4 +61,9 @@ export interface Options {
     isPromiseError?: boolean;
     isResourceError?: boolean;
     isRequest?: boolean;
+    beforeInit?: () => void;
+    mergeMsg?: () => Record<string, any> | Promise<Record<string, any>>;
+    beforeSendMsg?: (data: ExtraMsg & BaseMsg) => ExtraMsg & BaseMsg;
+    isLog?: boolean;
+    headers?: Record<string, any>;
 }
