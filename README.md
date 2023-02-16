@@ -154,4 +154,4 @@ init({
 | type |   标识为 error   |
 |  st  | 错误类型 promise |
 | file |       ' '        |
-| msg  |     错误信息     |
+| msg  |     错误信息     | 
