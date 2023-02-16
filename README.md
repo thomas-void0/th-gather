@@ -11,7 +11,7 @@ npm i th-gather
 ```
 
 或者
-
+ 
 ```yarn
 yarn add th-gather
 ```
