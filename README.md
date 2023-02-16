@@ -7,7 +7,7 @@
 ## 安装
 
 ```npm
-npm i th-gather
+npm install th-gather
 ```
 
 或者
